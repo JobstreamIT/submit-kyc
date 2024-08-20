@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional Form</title>
     <style>
-
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
@@ -71,12 +70,6 @@
             margin-top: 10px;
         }
 
-        .file-preview img {
-            max-width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
         .file-preview .remove-button {
             position: absolute;
             top: 5px;
@@ -90,10 +83,6 @@
             height: 20px;
             text-align: center;
             line-height: 20px;
-        }
-        .file-previw {
-            height:10px;
-            width:10px;
         }
     </style>
 </head>
@@ -138,19 +127,18 @@
             if (file) {
                 const fileDiv = document.createElement('div');
                 fileDiv.classList.add('file-item');
-                const img = document.createElement('img');
-                img.src = URL.createObjectURL(file);
-                img.onload = () => URL.revokeObjectURL(img.src); // Free memory
-                fileDiv.appendChild(img);
+                fileDiv.textContent = file.name;
                 const removeButton = document.createElement('button');
                 removeButton.textContent = 'X';
                 removeButton.classList.add('remove-button');
                 removeButton.addEventListener('click', () => {
                     fileDiv.remove();
                     input.value = ''; // Clear the input
+                    input.nextElementSibling.textContent = 'No file chosen';
                 });
                 fileDiv.appendChild(removeButton);
                 fileDisplay.appendChild(fileDiv);
+                input.nextElementSibling.textContent = file.name;
             }
         }
 
