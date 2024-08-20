@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Form</title>
+    <title>Submit KYC</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -88,8 +88,10 @@
 </head>
 <body>
     <div class="form-container">
-        <form>
-            <h2>Personal Information</h2>
+<form action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="0f887b91-f85f-4a80-ba99-e7972c4c0194">
+
+            <h2>Submit KYC</h2>
             <div class="form-group">
                 <label for="fullName">Full Legal Name</label>
                 <input type="text" id="fullName" name="fullName" required>
