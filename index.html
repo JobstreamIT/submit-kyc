@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit KYC</title>
+    <title>Professional Form</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,7 +41,7 @@
 
         input[type="text"],
         input[type="date"],
-        input[type="file"],
+        input[type="url"],
         input[type="tel"] {
             width: 100%;
             padding: 10px;
@@ -63,35 +63,12 @@
         button:hover {
             background-color: #0056b3;
         }
-
-        .file-preview {
-            position: relative;
-            display: inline-block;
-            margin-top: 10px;
-        }
-
-        .file-preview .remove-button {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-            text-align: center;
-            line-height: 20px;
-        }
     </style>
 </head>
 <body>
     <div class="form-container">
-<form action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="0f887b91-f85f-4a80-ba99-e7972c4c0194">
-
-            <h2>Submit KYC</h2>
+        <form>
+            <h2>Personal Information</h2>
             <div class="form-group">
                 <label for="fullName">Full Legal Name</label>
                 <input type="text" id="fullName" name="fullName" required>
@@ -101,14 +78,12 @@
                 <input type="date" id="dob" name="dob" required>
             </div>
             <div class="form-group">
-                <label for="legalIDFront">Legal ID (Front)</label>
-                <input type="file" id="legalIDFront" name="legalIDFront" accept="image/*" required>
-                <div id="fileDisplayFront" class="file-preview"></div>
+                <label for="legalIDFront">Legal ID (Front) Link</label>
+                <input type="url" id="legalIDFront" name="legalIDFront" required>
             </div>
             <div class="form-group">
-                <label for="legalIDBack">Legal ID (Back)</label>
-                <input type="file" id="legalIDBack" name="legalIDBack" accept="image/*" required>
-                <div id="fileDisplayBack" class="file-preview"></div>
+                <label for="legalIDBack">Legal ID (Back) Link</label>
+                <input type="url" id="legalIDBack" name="legalIDBack" required>
             </div>
             <div class="form-group">
                 <label for="taxID">Legal Tax ID Number (SSN/ITIN)</label>
@@ -116,41 +91,11 @@
             </div>
             <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" name="phone" required>
+                <input type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="123-456-7890" required>
+                <small>Format: 123-456-7890</small>
             </div>
             <button type="submit">Submit</button>
         </form>
     </div>
-    <script>
-        function handleFileUpload(input, displayId) {
-            const fileDisplay = document.getElementById(displayId);
-            fileDisplay.innerHTML = '';
-            const file = input.files[0];
-            if (file) {
-                const fileDiv = document.createElement('div');
-                fileDiv.classList.add('file-item');
-                fileDiv.textContent = file.name;
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'X';
-                removeButton.classList.add('remove-button');
-                removeButton.addEventListener('click', () => {
-                    fileDiv.remove();
-                    input.value = ''; // Clear the input
-                    input.nextElementSibling.textContent = 'No file chosen';
-                });
-                fileDiv.appendChild(removeButton);
-                fileDisplay.appendChild(fileDiv);
-                input.nextElementSibling.textContent = file.name;
-            }
-        }
-
-        document.getElementById('legalIDFront').addEventListener('change', function() {
-            handleFileUpload(this, 'fileDisplayFront');
-        });
-
-        document.getElementById('legalIDBack').addEventListener('change', function() {
-            handleFileUpload(this, 'fileDisplayBack');
-        });
-    </script>
 </body>
 </html>
